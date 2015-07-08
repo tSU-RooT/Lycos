@@ -1,0 +1,265 @@
+body {
+  margin:0px;
+  padding:0px;
+  background:#C08C8C;
+  text-align:center;
+}
+
+a:link{color:#2FB236;}
+a:visited{color:#20AB20;}
+a[href]:active{color:#f00;}
+a[href]:hover{color:#fff;}
+
+.Frame {
+  margin: 0 auto;
+  width:700px;
+  padding: 10px;
+  border-radius: 6px;
+  background:#400C0C;
+}
+.VillageInfo {
+  margin: 6px 40px;
+  padding: 5px 40px;
+  background:#A04C4C;
+  border-radius: 30px;
+  font-size: 115%;
+}
+.Invalid {
+  color:#505050;
+}
+
+.PageIndex{
+  color:white;
+}
+
+.MemberList {
+  margin: 0 auto;
+  border:1px solid #555;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  width:300px;
+  border-radius: 6px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  font-size:120%;
+  background-color: #EEE8AA;
+}
+.JobDescription {
+  margin: 0 auto;
+  border:1px solid #555;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  max-width:450px;
+  border-radius: 6px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  background-color: #B9FFB9;
+}
+.SystemMessage {
+  margin: 0 auto;
+  border:2px dashed #eaa;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  width:650px;
+  border-radius: 6px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  background-color: #df4327;
+  font-size:110%;
+}
+.Public {
+  margin: 0 auto;
+  border:1px solid #555;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  width:650px;
+  border-radius: 6px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  background-color: #F0F0F0;
+}
+
+.Personal {
+  margin: 0 auto;
+  border:1px solid #555;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  width:650px;
+  border-radius: 6px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  background-color: #c6c6c6;
+}
+
+.Whisper {
+  margin: 0 auto;
+  border:1px solid #555;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  width:650px;
+  border-radius: 6px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  background-color: #E01010;
+}
+.Graveyard {
+  margin: 0 auto;
+  border:1px solid #555;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  width:550px;
+  border-radius: 6px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  background-color: #EE82EE;
+}
+.SystemSecret {
+  margin: 0 auto;
+  border:2px solid #EEE;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  width:520px;
+  border-radius: 6px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  font-weight:bold;
+  background-color: #dda0dd;
+}
+.Result {
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  min-width:350px;
+  max-width:580px;
+  border-radius: 4px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  color: #ffffff;
+  font-size:90%;
+  background-color: #300B0A;
+}
+.ResultTable {
+  margin: 0 auto;
+  border: 1px;
+  bordercolor: #eeeeee;
+  rules: all;
+  min-width: 550px;
+  min-height: 550px;
+
+}
+.Win {
+  background-color: #DC143C;
+}
+.Lose {
+  background-color: #4169E1;
+}
+.Alive {
+  color: #000080;
+  background-color: #FFB6C1;
+}
+.Dead {
+  color: #F5F5F5;
+  background-color: #696969;
+}
+.JobImage {
+  margin: 10px 4px 7px 10px;
+}
+.BorderlessTable {
+  border:none;
+}
+.MemberTable {
+  border:1px solid #555;
+  padding: 2px;
+  cellspacing:1px;
+  text-align:left;
+}
+.Account {
+  color: #FFFFFF;
+  font-size: 20px;
+  padding: 5px;
+  text-align:right;
+}
+.Comment {
+  margin: 0 auto;
+  padding: 5px;
+  border-radius: 6px;
+  width: 550px;
+  border:2px solid #555;
+  background:#ccffff;
+}
+.Enter {
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 550px;
+  border:2px solid #555;
+  background:#bbefef;
+}
+.Face {
+  margin: 10px 4px 7px 10px;
+  width: 100px;
+  height: 100px;
+}
+.Text {
+  margin: 0px 0px 0px 7px ;
+  min-height: 65px;
+  text-align:left;
+  font-size:120%;
+}
+.TextMeta {
+  float: right;
+  margin: 25px 2px 0px 3px;
+}
+
+.Vote {
+  margin: 0 auto;
+  border:2px solid #666;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  width:350px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  background-color: #ffa500;
+}
+.InputArea {
+  margin: 8px 4px 4px 4px;
+  width: 300px;
+  vertical-align:top;
+  margin: 20px 7px 2px 7px;
+  padding: 10px;
+  border:2px dotted #000;
+  text-align:left;
+}
+.MessageArea {
+  vertical-align:top;
+}
+
+.SmallFrame {
+  vertical-align:top;
+  margin:10px 4px 7px 7px;
+  padding:2px 8px 2px 8px;
+  border:solid #448;
+  border-width:0 0 1px 4px;
+  width: 500px;
+  text-align:left;
+  font-size:100%;
+  font-weight:bold;
+}
+.pre {
+  padding:4px;
+  text-align:left;
+  vertical-align:top;
+  overflow:auto;
+  min-height: 65px;
+}

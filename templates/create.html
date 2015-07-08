@@ -1,0 +1,56 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>村立て</title>
+</head>
+<body>
+<form action="/build" method="POST">
+<div id="create" class="create">
+<form name="frm">
+<section>
+<h1>新規村立て</h1>
+<p><label>名前：</label><input type="text" name="Name"/></p>
+<p><input type="checkbox" name="freemason" value="true">共有有り</p>
+<p><input type="checkbox" name="fox" value="true">狐有り</p>
+<p><input type="checkbox" name="chip" value="true">役欠け有り</p>
+<p>
+  <select name="hour" size="1">
+    <option value="0" selected>0時</option>
+    <option value="1">1時</option>
+    <option value="2">2時</option>
+    <option value="3">3時</option>
+    <option value="4">4時</option>
+    <option value="5">5時</option>
+    <option value="6">6時</option>
+    <option value="7">7時</option>
+    <option value="8">8時</option>
+    <option value="9">9時</option>
+    <option value="10">10時</option>
+    <option value="11">11時</option>
+    <option value="12">12時</option>
+    <option value="13">13時</option>
+    <option value="14">14時</option>
+    <option value="15">15時</option>
+    <option value="16">16時</option>
+    <option value="17">17時</option>
+    <option value="18">18時</option>
+    <option value="19">19時</option>
+    <option value="20">20時</option>
+    <option value="21">21時</option>
+    <option value="22">22時</option>
+    <option value="23">23時</option>
+  </select>
+  <select name="minute" size="1">
+    <option value="0" selected>0分</option>
+    <option value="30">30分</option>
+  </select>
+</p>
+<input type="submit" value="立てる">
+</section>
+</div>
+</form>
+</body>
+</html>
+{{end}}

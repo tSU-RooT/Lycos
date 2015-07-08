@@ -1,0 +1,22 @@
+Assets License
+
+./
+  banner.jpg
+  Medium.png
+  Seer.png
+  WereWolf.png
+
+  License: Public Domain(I found from Wikimedia Commons)
+
+hatena.png
+  painted by tSU-RooT
+  License CC0
+   https://creativecommons.org/publicdomain/zero/1.0/
+
+face/default/
+  00.png ~ 07.png
+  painted by fuaim
+  (c) Copyright 2015 fuaim
+  These works are licensed under a Creative Commons Attribution-ShareAlike 2.1(or later version) JP license.
+  これらの作品は Creative Commons 表示 - 継承 2.1(またはそれ以降) 日本 ライセンスの下で提供されます。
+  https://creativecommons.org/licenses/by-sa/2.1/jp/

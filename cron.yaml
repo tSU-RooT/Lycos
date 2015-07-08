@@ -1,0 +1,4 @@
+cron:
+- description: 10 minutes update
+  url: /update
+  schedule: every 10 minutes from 0:00 to 23:59

@@ -1,0 +1,55 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style/top.css" type="text/css">
+<title>Lycos 村一覧</title>
+</head>
+<body>
+<section>
+<div class="Frame">
+  <div class="Account">
+  {{if .Login}}
+    <p>{{.Reader.Handle}}でログインしています <a href="{{.LogoutURL}}">ログアウト</a><br />
+      <form name="RenameHandle" method="POST" action="/rename">
+        <input type="text" name="InputName" size="16" value="{{.Reader.Handle}}">
+        <input type="submit" value="名前変更">
+      </form>
+    </p>
+  {{else}}
+    <p><a href="{{.LoginURL}}">ログイン</a></p>
+  {{end}}
+  </div>
+  <p>
+    <h1>Welcome to Lycos Jinrou System!</h1>
+    <div class="description">
+      Lycosは現在開発中の長期人狼システムです。<br />
+      このシステムはGoogle App Engine上で動いており、Googleアカウントでログインして参加することができます。
+      現在は開発中なので管理者のみが村を建てることができ、一部のベータテストのみが行われています。
+    </div>
+  </p>
+  <p>
+  <h2>現在開かれている村</h2>
+  <div class="Village">
+    <table border="1">
+    <tr><th>名前</th><th>更新</th><th>人数</th><th>共有</th><th>狐</th><th>欠け</th>
+    {{range .Villages}}
+    <tr>
+      <td><a href="./village/?vno={{.No}}&amp;day=recent&amp;page=recent">{{.Name|html}}</a>
+      <td>{{.UpdatetimeHour|html}}時{{.UpdatetimeMinute|html}}分</td>
+      <td>{{.NumberOfPeople|html}}人</td>
+      <td>{{if .IncludeFreemason}}◯{{else}}×{{end}}</td>
+      <td>{{if .IncludeFox}}◯{{else}}×{{end}}</td>
+      <td>{{if .Chip}}◯{{else}}×{{end}}</td>
+    </tr>
+    {{end}}
+    </table>
+  </div>
+  </p>
+  <p><a href="/create">村の作成</a> <a href="/static/credit.html">クレジット</a></p>
+</div>
+</section>
+</body>
+</html>
+{{end}}

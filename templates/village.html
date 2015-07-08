@@ -1,0 +1,296 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style/style.css" type="text/css">
+<title>【No.{{.Village.No}}】{{.Village.Name}} - Lycos System(development)</title>
+<script type="text/javascript">
+function changeFace() {
+  var i = document.enterform.charaSet.selectedIndex;
+  var s = document.enterform.charaSet.options[i].value;
+
+  document.charasetFace.src = "../images/face/" + s;
+};
+</script>
+</head>
+<body>
+<section>
+<div class="Frame">
+  <a href="../"><img src="../images/banner.jpg"  alt="Banner"></a><br />
+  <div class="Account">
+  {{if .Login}}
+    <p>ログインしています <a href="{{.LogoutURL}}">ログアウト</a></p>
+  {{else}}
+    <p><a href="{{.LoginURL}}">ログイン</a></p>
+  {{end}}
+  </div>
+  <div class="VillageInfo">
+    <div class="SmallFrame">
+      {{.Village.Name}}
+    </div>
+    更新予定 {{.UpdatetimeNotice}} <br />
+    <div class="Chapter">
+      {{range .Chapters}}
+        {{if .Invalid}}
+          <span class="InvalidColor">{{.Name|html}}</span>
+        {{else}}
+          <a href="./?vno={{$.No|html}}&amp;day={{.Day|html}}">{{.Name|html}}</a>
+        {{end}}
+      {{end}}
+      {{if .Opening}}
+          <a href="./?vno={{$.No}}&amp;day=recent&amp;page=recent">最新</a>
+      {{end}}
+    </div>
+    <div class="PageIndex">
+      Page:
+      {{range .Indexes}}
+        {{if .Invalid}}
+        <span class="InvalidColor">{{.Number|html}}</span>
+        {{else}}
+          <a href="./?vno={{$.No|html}}&amp;day={{$.Day|html}}&amp;page={{.Number|html}}">{{.Number}}</a>
+        {{end}}
+      {{end}}
+    </div>
+  </div>
+  <!-- 投稿 -->
+  {{range .Posts}}
+    <div class="{{.Type|html}}">
+      {{if .HasFace}}
+      <table class="BorderlessTable">
+      <tbody>
+      <tr>
+        <td>
+        <img src="../images/face/{{.Face}}" alt="Face" name="Face" class="Face"></td>
+        <td class="MessageArea">
+          <p class="SmallFrame">{{.Author|html}}</p>
+          <p class="Text">{{.Text|rawhtml}}</p>
+          {{if .IsPersonal}}
+            {{if $.IsEpilogue}}
+            <span class="TextMeta">{{.NumberTag|showNumberTag}}</span>
+            {{end}}
+          {{else}}
+            <span class="TextMeta">{{.JstAboutTime}} {{.NumberTag|showNumberTag}}</span>
+          {{end}}
+        </td>
+      </tr>
+      </tbody>
+      </table>
+      {{else}}
+        <p>{{.Text|rawhtml}}</p>
+      {{end}}
+    </div>
+  {{end}}
+  {{if .ShowResult}}
+    <div class="Result">
+    <table class="ResultTable" border="1" rules="all">
+      <thead>
+        <tr>
+          <th>キャラネーム</th>
+          <th>ハンドル</th>
+          <th>生死</th>
+          <th>勝敗</th>
+          <th>役職</th>
+          <th>希望</th>
+        </tr>
+      <tbody>
+        {{range .Result}}
+      　<tr>
+          <th>{{.Name}}</th>
+          <th>{{.Handle}}</th>
+          {{if .Dead}}<th class="Dead">死亡{{else}}<th class="Alive">生存{{end}}</th>
+          {{if .Victory}}<th class="Win">勝利{{else}}<th class="Lose">敗北{{end}}</th>
+          <th>{{.Job.String}}</th>
+          <th>{{.WantJob}}</th>
+        </tr>
+        {{end}}
+    </table>
+  </div>
+  {{end}}
+  {{if .Login}}
+    {{if .Enter}}
+      {{if .Recent}}
+      <!-- 入場済処理 -->
+      <div class="Comment">
+        <form name="writeform" method="POST" action="/prewrite">
+          <table class="BorderlessTable">
+            <tbody>
+              <tr>
+                <td><img src="../images/face/{{.UserFace}}" alt="Face" name="Face" class="Face"></td>
+                <td>
+                  <h4>{{.Reader.Name|html}}</h4>
+                  <textarea name="comment" rows="7" cols=50></textarea><br />
+                  <input type="submit" value="書き込み">
+                  <input type="hidden" name="vno" value="{{.No}}">
+                  <input type="hidden" name="characterID" value="{{.Reader.CharacterID}}">
+                  <select name="commentType" id="selectBox" >
+                  {{if .Reader.Dead}}
+                    <option value="graveyard" class="graveyard" cbgcolor="#FFFFFF" ctextcolor="black"> (呻き) </option>
+                    <option value="personal" class="personal"   cbgcolor="#AAAAAA" ctextcolor="black"> (独り言)</option>
+                  {{else}}
+                    <option value="public" class="public" cbgcolor="#FFFFFF" ctextcolor="black"> (発言) </option>
+                    <option value="personal" class="personal"   cbgcolor="#AAAAAA" ctextcolor="black"> (独り言)</option>
+                    {{if .Reader.Job.IsWolf}}
+                    <option value="whisper" class="whisper"   cbgcolor="#AAAAAA" ctextcolor="black"> (邪悪な囁き)</option>
+                    {{end}}
+                  {{end}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+      </div>
+    {{end}}
+    <!-- 投票フォームまたは死亡表記 -->
+    {{if .ShowVoteForm}}
+      <div class="Vote">
+        {{if .Reader.Dead}}
+          <p>あなたは死亡しています。</p>
+        {{else}}
+      　  <p>本日の投票先を選択してください。</p>
+          <p>
+          <form name="vote_target" method="POST" action="/vote">
+          <input type="hidden" name="vno" value="{{$.No}}">
+          <input type="hidden" name="characterID" value="{{$.Reader.CharacterID}}">
+          <select id="VoteTarget" name="VoteTarget">
+          {{range .VoteTargetLists}}
+            <option value="{{.CharacterID}}">{{.Name}}</option>
+          {{end}}
+          <input type="submit" value="変更">
+          </p>
+          <p>{{.VoteTargetsName}}</p>
+          </form>
+        {{end}}
+      </div>
+    {{end}}
+    {{else}}
+      {{if .Collecting}}
+      <!-- 入場フォーラム処理 -->
+      <div class="Enter">
+        <form name="enterform" method="POST" action="/enter">
+          <input type="hidden" name="vno" value="{{.No}}">
+          <table class="BorderlessTable">
+            <tbody>
+              <tr>
+                <td><img src="../images/hatena.png"  alt="charasetFace" name="charasetFace" class="Face"></td>
+                <td class="InputArea">
+                  <label for="Name">名前：</label>
+                  <input type="text" name="Name" size="20"><br>
+                  <label for="charaSet">キャラクター：</label>
+                  <select id="charaSet" name="charaSet" onFocus="changeFace()" onChange="changeFace()">
+                    {{range .CharacterSet}}
+                    <option value="{{.File}}">{{.Name}}</option>　{{end}}
+                  </select><br />
+                  <label for="wantjob">役職：</label>
+                  <select id="wantjob" name="wantjob">
+                    <option value="1">おまかせ</option>
+                    <option value="2">村陣営</option>
+                    <option value="3">村陣営(役職)</option>
+                    <option value="4">人外陣営</option>
+                  </select>
+                  <textarea name="comment" rows="5" cols="42"></textarea><br>
+                  <input type="submit" value="参加">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+      </div>
+      {{end}}
+    {{end}}
+  {{end}}
+  {{if .Enter}}
+    <!-- 能力表示 -->
+    {{if .ShowAbility}}
+    <div class="JobDescription">
+      <table class="BorderlessTable">
+        <tbody>
+          <tr>
+          <td><img src="../images/{{.JobImage|html}}" alt="JobImage" name="JobImage" class="JobImage"></td>
+          <td>
+            <p class="Text">{{.Reader.Job.Description|html}}</p>
+            {{if .ShowAbilitySelect}}
+              <form name="change_target" method="POST" action="/change">
+                <p>
+                <input type="hidden" name="vno" value="{{$.No}}">
+                <input type="hidden" name="characterID" value="{{$.Reader.CharacterID}}">
+                能力の対象:
+                <select id="AbilityTarget" name="AbilityTarget">
+                  {{range .AbilityTargetLists}}
+                    <option value="{{.CharacterID}}">{{.Name}}</option>
+                  {{end}}
+                </select>
+                <input type="submit" value="変更">
+                </p>
+                <p>{{.AbilityTargetsName}}</p>
+              </form>
+            {{end}}
+          </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    {{end}}
+  {{end}}
+  {{if .ShowStartButton}}
+  <div class="MemberList">
+    <form name="start" method="POST" action="/start/?vno={{$.No}}">
+    <p>村を開始できます。<br />
+    <input type="submit" value="村を開始する">
+    </p>
+    </form>
+  </div>
+  {{end}}
+  <!-- メンバーリスト -->
+  <div class="MemberList">
+    {{if .Collecting}}
+      <p>現在村に参加しているのは<br />
+      {{.NpcName}}{{range .People}}、{{.Name}}{{end}}<br />
+      の{{.Village.NumberOfPeople|up}}人です。
+      </p>
+    {{else}}
+      <table class="MemberTable">
+        <thead>
+        <tr>
+          <th>名前</th>
+          <th>生死</th>
+        </tr>
+        </thead>
+        <tbody>
+          {{range .People}}
+            <tr>
+              <th>{{.Name}}</th>
+              {{if .Dead}}<th>×</th>{{else}}<th>○</th>{{end}}
+            </tr>
+          {{end}}
+        </tbody>
+      </table>
+    {{end}}
+  </div>
+  <div class="Chapter">
+    {{range .Chapters}}
+    {{if .Invalid}}
+    <span class="Invalid">{{.Name|html}}</span>
+    {{else}}
+    <a href="./?vno={{$.No}}&amp;day={{.Day}}">{{.Name}}</a>
+    {{end}}
+    {{end}}
+    {{if .Opening}}
+    <a href="./?vno={{$.No}}&amp;day=recent&amp;page=recent">最新</a>
+    {{end}}
+  </div>
+  <div class="PageIndex">
+    Page:
+    {{range .Indexes}}
+    {{if .Invalid}}
+    <span class="Invalid">{{.Number|html}}</span>
+    {{else}}
+    <a href="./?vno={{$.No}}&amp;day={{$.Day}}&amp;page={{.Number}}">{{.Number}}</a>
+    {{end}}
+    {{end}}
+  </div>
+</div>
+</section>
+</body>
+</html>
+{{end}}

@@ -1,0 +1,46 @@
+body {
+  margin:0px;
+  padding:0px;
+  background:#C08C8C;
+  text-align:center;
+}
+
+a:link{color:#2FB236;}
+a:visited{color:#20AB20;}
+a[href]:active{color:#f00;}
+a[href]:hover{color:#fff;}
+
+.Frame {
+  color: #FFFFFF;
+  margin: 0 auto;
+  width:750px;
+  padding: 10px;
+  border-radius: 6px;
+  background:#400C0C;
+}
+.Village {
+  width:400px;
+  border-radius: 6px;
+  padding: 10px;
+  margin: 0 auto;
+  background:#703C3C;
+  text-align:center;
+}
+.description {
+  padding: 10px;
+  text-align:left;
+}
+.credit {
+  border-radius: 8px;
+  padding: 13px;
+  margin: 0 auto;
+  text-align:left;
+  background:#FF4F02;
+  color:#FFDBC9;
+  font-size: 115%;
+}
+.Account {
+  font-size: 20px;
+  padding: 5px;
+  text-align:right;
+}

@@ -1,0 +1,51 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../style/style.css" type="text/css">
+<title>Name</title>
+</head>
+<body>
+<section>
+<div class="Frame">
+  <p><img src="../images/banner.jpg"  alt="Banner"></a></p>
+  <form name="frm" method="POST" action="/write">
+    {{if .IsPublic}}
+    <div class="Public">
+    <input type="hidden" name="commentType" value="Public">
+    {{end}}
+    {{if .IsPersonal}}
+    <div class="Personal">
+      <input type="hidden" name="commentType" value="Personal">
+    {{end}}
+    {{if .IsWhisper}}
+    <div class="Whisper">
+      <input type="hidden" name="commentType" value="Whisper">
+    {{end}}
+    {{if .IsGraveyard}}
+    <div class="Graveyard">
+      <input type="hidden" name="commentType" value="Graveyard">
+    {{end}}
+    <input type="hidden" name="vno" value="{{.VillageNo}}">
+    <input type="hidden" name="comment" value="{{.HiddenText}}">
+    <input type="hidden" name="characterID" value="{{.CharacterID}}">
+    <table class="MessageTable">
+      <tbody>
+        <tr>
+          <td><img src="../images/face/{{.Face}}" alt="Face" name="Face" class="Face"></td>
+          <td class="MessageArea">
+            <p class="SmallFrame">{{.Author|html}}</p>
+            <p class="Text">{{.Text}}</p>
+        </tr>
+    </table>
+    </div>
+    <p><input type="submit" name="button" value="書き込み">
+       <input type="submit" name="button" value="やめる">
+    </p>
+  </form>
+</div>
+</section>
+</body>
+</html>
+{{end}}
