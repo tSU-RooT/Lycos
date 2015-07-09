@@ -58,4 +58,4 @@ If you want to use original Character Face on this app,
 Haruki Tsurumoto (tSU-RooT) <tsu.root@gmail.com>
 # License
 Lycos is free software.  
-Programs are licensed under MIT License.  
+Programs are licensed under the MIT License.  
