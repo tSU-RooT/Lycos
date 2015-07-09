@@ -21,9 +21,8 @@ func buildPageHandler(w http.ResponseWriter, r *http.Request) {
 	g := goon.FromContext(c)
 	u := user.Current(c)
 	if u == nil {
-		if err := createPageTmpl.ExecuteTemplate(w, "base", nil); err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-		}
+		bad(w)
+		return
 	}
 	var village Village
 	if n := r.FormValue("Name"); n != "" {
@@ -49,7 +48,7 @@ func buildPageHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	} else if err == datastore.ErrNoSuchEntity {
-		management.VillageNo = 0
+		management.VillageNo = 1
 	}
 	village.No = management.VillageNo
 	village.PublicPostNo = 0

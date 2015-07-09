@@ -450,6 +450,7 @@ func villagePostWriteHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		c.Debugf("%v", err)
 		bad(w)
+		return
 	}
 	http.Redirect(w, r, "/village/?vno="+strconv.FormatInt(no, 10)+"&day=recent&page=recent", http.StatusFound)
 }
