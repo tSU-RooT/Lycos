@@ -200,8 +200,7 @@ func Execute(people []Person) []Post {
 	return result
 }
 
-func Fortune(people []Person) []Post {
-	result := make([]Post, 0)
+func Fortune(people []Person) Post {
 	target := ""
 	var seer Person
 	for i := range people {
@@ -211,25 +210,25 @@ func Fortune(people []Person) []Post {
 		}
 	}
 	if target == "" || seer.Name == "" {
-		return result
+		return Post{}
 	}
 	for i := range people {
 		if people[i].CharacterID == target {
 			if people[i].Job.IsBlack() {
 				t := "占いをした結果、" + people[i].Name + "は人狼のようだ。"
 				p := Post{Author: "System", AuthorID: seer.UserID, Text: t, Time: time.Now(), Type: SystemSecret}
-				result = append(result, p)
+				return p
 			} else {
 				if people[i].Job == Fox {
 					people[i].Dead = true
 				}
 				t := "占いをした結果、" + people[i].Name + "は人狼ではないようだ。"
 				p := Post{Author: "System", AuthorID: seer.UserID, Text: t, Time: time.Now(), Type: SystemSecret}
-				result = append(result, p)
+				return p
 			}
 		}
 	}
-	return result
+	return Post{}
 }
 
 // Raid by Werewolf

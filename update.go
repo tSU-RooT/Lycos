@@ -103,7 +103,10 @@ func updateVillage(us UpdateSchedule, g *goon.Goon) error {
 		}
 		before := make([]Person, len(people))
 		copy(before, people)
-		posts = append(posts, Fortune(people)...)
+		p3 := Fortune(people)
+		if p3.Text != "" {
+			posts = append(posts, p3)
+		}
 		Raid(people)
 		// Check Dead Person
 		peaceful := true
